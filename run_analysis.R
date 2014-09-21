@@ -5,20 +5,19 @@ run_analysis <- function() {
   # Merge data sets
   featurestable <- read.table("./features.txt")
   fnames <- featurestable[2]
-  #charfnames <- as.character(fnames)
   headers <- cbind(t(fnames), "Activity", "Subject")
   clist <- c("test","train")
   for (i in clist) {
-  t <- i
-  readdir <- paste("./",t,sep="")
-  readxfile <- paste(readdir,"/X_",t,".txt",sep="")
-  xtable <- read.table(readxfile)
-  readyfile <- paste(readdir,"/y_",t,".txt",sep="")
-  ytable <- read.table(readyfile)
-  readsubfile <- paste(readdir,"/subject_",t,".txt",sep="")
-  subtable <- read.table(readsubfile)
-  datatable <- cbind.data.frame(xtable,ytable,subtable)
-  assign(paste(t, "datatable", sep=''),datatable)
+    t <- i
+    readdir <- paste("./",t,sep="")
+    readxfile <- paste(readdir,"/X_",t,".txt",sep="")
+    xtable <- read.table(readxfile)
+    readyfile <- paste(readdir,"/y_",t,".txt",sep="")
+    ytable <- read.table(readyfile)
+    readsubfile <- paste(readdir,"/subject_",t,".txt",sep="")
+    subtable <- read.table(readsubfile)
+    datatable <- cbind.data.frame(xtable,ytable,subtable)
+    assign(paste(t, "datatable", sep=''),datatable)
   }
   colnames(traindatatable) <- headers
   colnames(testdatatable) <- headers
@@ -73,6 +72,8 @@ run_analysis <- function() {
   # Data set with the average of each variable for each activity and each subject.
   library(plyr)
   avgdf <- ddply(newdf, c("Subject", "Activity"), numcolwise(mean))
+  
+  # Write the output to a txt file
   write.table(avgdf, 'avgdf.txt', row.name=FALSE) 
   
 }

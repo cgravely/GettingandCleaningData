@@ -1,6 +1,6 @@
 
 # Code Book for Getting and Cleaning Data Course Project
-This is a code book that describes the variables, the data, and any transformations or work that were performed to clean up the data.
+This is a code book that describes the variables, the data, and any transformations or work that was performed to clean up the data.
 
 # Variable Descriptions
 
